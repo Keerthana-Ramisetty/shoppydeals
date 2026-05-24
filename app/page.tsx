@@ -5,14 +5,14 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { ProductGrid } from "@/components/ProductGrid";
 import { ProductCard } from "@/components/ProductCard";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function HomePage() {
   let categories: Awaited<ReturnType<typeof api.getCategories>>["categories"] =
     [];
   let featured: Awaited<ReturnType<typeof api.getProducts>>["products"] = [];
   let trending: Awaited<ReturnType<typeof api.getProducts>>["products"] = [];
-
   try {
     const [catRes, featuredRes, trendingRes] = await Promise.all([
       api.getCategories(),

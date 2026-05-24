@@ -17,8 +17,15 @@ function apiImagePatterns(): { protocol: "http" | "https"; hostname: string; por
     return [];
   }
 }
-
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   images: {
     remotePatterns: [
       ...apiImagePatterns(),

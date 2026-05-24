@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { api, siteConfig } from "@/lib/api";
@@ -29,11 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export function generateStaticParams() {
-  return VALID_SLUGS.map((slug) => ({ slug }));
-}
-
-export const revalidate = 60;
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
