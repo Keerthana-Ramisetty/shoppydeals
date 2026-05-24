@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shoppy Deals
 
-## Getting Started
+Modern affiliate deals platform for Telugu audiences. Users browse deals and redirect to partner stores (Amazon, Flipkart, Myntra, etc.). No checkout or cart — affiliate links only.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| Layer | Tech |
+|-------|------|
+| Frontend | Next.js 16 (App Router), TypeScript, Tailwind CSS 4, Framer Motion |
+| Backend | Node.js, Express 5, MongoDB, Mongoose |
+| Auth | JWT (admin only) |
+
+## Project structure
+
+```
+shoppydeals/
+├── app/                 # Next.js pages (public + /admin)
+├── components/          # UI components
+├── lib/                 # API client, types, auth helpers
+├── backend/             # Express API
+│   ├── src/
+│   │   ├── models/      # Admin, Product, Category, ClickAnalytics
+│   │   ├── routes/
+│   │   └── index.ts
+│   └── uploads/         # Product images (local)
+└── public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Quick start (local)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. MongoDB
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install and run MongoDB locally, or use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and set `MONGODB_URI`.
 
-## Learn More
+### 2. Backend
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd backend
+cp .env.example .env
+# Edit .env — set JWT_SECRET, ADMIN_PASSWORD, etc.
+npm install
+npm run seed    # Creates admin, categories, sample products
+npm run dev     # http://localhost:5000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Default admin (after seed):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Email: `admin@shoppydeals.com`
+- Password: value of `ADMIN_PASSWORD` in `backend/.env` (default `ChangeMe123!`)
 
-## Deploy on Vercel
+### 3. Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# From project root
+cp .env.example .env.local
+npm install
+npm run dev     # http://localhost:3000
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set in `.env.local`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_TELEGRAM_URL=https://t.me/your_channel
+```
+
+### 4. Admin panel
+
+Open [http://localhost:3000/admin](http://localhost:3000/admin) → login → add/edit products.
+
+## Features
+
+**Public site**
+
+- Hero slider (featured deals)
+- Trending & latest deals with Load More
+- Category pages: mobiles, electronics, fashion, kitchen, beauty, gadgets
+- Search with category filter
+- Click tracking → opens affiliate URL in new tab
+- Sticky header, mobile bottom nav, floating Telegram button
+- SEO: metadata, sitemap, robots, Open Graph
+
+**Admin (`/admin`)**
+
+- JWT login
+- CRUD products with image upload
+- Affiliate URL, store badge, featured toggle
+- Categories management
+- Dashboard: clicks, top products, store breakdown
+
+## API endpoints
+
+| Method | Path | Auth |
+|--------|------|------|
+| GET | `/api/health` | — |
+| POST | `/api/auth/login` | — |
+| GET | `/api/categories` | — |
+| GET | `/api/products` | — |
+| POST | `/api/clicks/:productId` | — |
+| POST | `/api/upload` | JWT |
+| GET | `/api/analytics/dashboard` | JWT |
+
+Query params for products: `page`, `limit`, `search`, `category`, `featured`, `trending`.
+
+## Deployment
+
+### Frontend — Vercel
+
+1. Import repo, set root directory to project root.
+2. Environment variables:
+   - `NEXT_PUBLIC_API_URL` → your Railway/Render API URL
+   - `NEXT_PUBLIC_SITE_URL` → `https://your-domain.com`
+   - `NEXT_PUBLIC_TELEGRAM_URL`, `NEXT_PUBLIC_CONTACT_EMAIL`
+
+### Backend — Railway or Render
+
+1. Deploy `backend/` folder.
+2. Set env: `MONGODB_URI`, `JWT_SECRET`, `CLIENT_URL` (Vercel URL), `ADMIN_EMAIL`, `ADMIN_PASSWORD`.
+3. Run `npm run seed` once via shell.
+4. Use persistent volume for `uploads/` or switch to S3/Cloudinary for images in production.
+
+### MongoDB Atlas
+
+Use connection string in `MONGODB_URI` on the backend service.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Next.js dev server |
+| `npm run dev:api` | Express API dev server |
+| `npm run seed` | Seed DB (backend) |
+| `npm run build` | Production Next.js build |
+| `npm run build:api` | Compile backend TypeScript |
+
+## Disclaimer
+
+This site lists affiliate deals only. Purchases happen on third-party stores. Prices and stock may change without notice.

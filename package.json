@@ -1,14 +1,21 @@
 {
   "name": "shoppydeals",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:api": "npm run dev --prefix backend",
+    "dev:all": "npm run dev & npm run dev:api",
     "build": "next build",
+    "build:api": "npm run build --prefix backend",
     "start": "next start",
-    "lint": "eslint"
+    "start:api": "npm run start --prefix backend",
+    "lint": "eslint",
+    "seed": "npm run seed --prefix backend"
   },
   "dependencies": {
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^0.511.0",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
