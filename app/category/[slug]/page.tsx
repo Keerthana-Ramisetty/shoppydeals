@@ -56,7 +56,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
-      <SectionTitle
+      <SectionTitleyekkad 
         title={`${categoryName} Deals`}
         telugu={`${categoryName} డీల్స్`}
         subtitle="Affiliate offers — redirects to partner stores"

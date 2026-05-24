@@ -2,23 +2,24 @@ import type { NextConfig } from "next";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-function apiImagePatterns(): { protocol: "http" | "https"; hostname: string; port?: string; pathname: string }[] {
+function apiImagePatterns() {
   try {
     const u = new URL(apiUrl);
-    const protocol = u.protocol.replace(":", "") as "http" | "https";
-    const pattern = {
-      protocol,
-      hostname: u.hostname,
-      pathname: "/uploads/**" as const,
-      ...(u.port ? { port: u.port } : {}),
-    };
-    return u.hostname === "localhost" ? [pattern] : [pattern];
+
+    return [
+      {
+        protocol: u.protocol.replace(":", "") as "http" | "https",
+        hostname: u.hostname,
+        pathname: "/uploads/**",
+        ...(u.port ? { port: u.port } : {}),
+      },
+    ];
   } catch {
     return [];
   }
 }
+
 const nextConfig: NextConfig = {
-  
   images: {
     remotePatterns: [
       ...apiImagePatterns(),
@@ -35,6 +36,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
   async rewrites() {
     return [
       {
