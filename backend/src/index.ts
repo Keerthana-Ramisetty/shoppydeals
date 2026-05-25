@@ -40,10 +40,12 @@ async function main() {
   app.use("/api/upload", uploadRoutes);
 
   app.use(errorHandler);
+  const PORT = process.env.PORT || env.port || 5000;
 
-  app.listen(env.port, () => {
-    console.log(`API running on http://localhost:${env.port}`);
+  app.listen(PORT, () => {
+  console.log(`API running on port ${PORT}`);
   });
+
 }
 
 main().catch((err) => {
