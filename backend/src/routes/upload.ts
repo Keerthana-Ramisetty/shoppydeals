@@ -5,8 +5,8 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { authMiddleware } from "../middleware/auth.js";
 import { env } from "../config/env.js";
+const __dirname = path.resolve();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const uploadsDir = path.join(__dirname, "../../uploads");
 
 if (!fs.existsSync(uploadsDir)) {

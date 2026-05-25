@@ -11,8 +11,7 @@ import productRoutes from "./routes/products.js";
 import clickRoutes from "./routes/clicks.js";
 import analyticsRoutes from "./routes/analytics.js";
 import uploadRoutes from "./routes/upload.js";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.resolve();
 
 async function main() {
   await connectDb();
