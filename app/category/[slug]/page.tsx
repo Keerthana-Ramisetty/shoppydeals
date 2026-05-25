@@ -58,7 +58,6 @@ export default async function CategoryPage({ params }: Props) {
     <div className="space-y-6">
       <SectionTitle 
         title={`${categoryName} Deals`}
-       
         subtitle="Affiliate offers — redirects to partner stores"
       />
       <CategoryChips categories={categories} />
