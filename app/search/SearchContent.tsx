@@ -17,7 +17,6 @@ export function SearchContent() {
     <div className="space-y-6">
       <SectionTitle
         title={q ? `Results for "${q}"` : "Search Deals"}
-        telugu={q ? `"${q}" కోసం ఫలితాలు` : "డీల్స్ వెతకండి"}
         subtitle={
           category ? `Filtered by ${category}` : "Find products across all stores"
         }
