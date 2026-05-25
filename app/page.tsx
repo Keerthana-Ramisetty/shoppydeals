@@ -38,7 +38,7 @@ export default async function HomePage() {
         <section>
           <SectionTitle
             title="Trending Deals"
-            telugu="ట్రెండింగ్ డీల్స్"
+            
             subtitle="Most clicked offers right now"
           />
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
@@ -52,7 +52,6 @@ export default async function HomePage() {
       <section>
         <SectionTitle
           title="Latest Deals"
-          telugu="లేటెస్ట్ డీల్స్"
           subtitle="Fresh offers updated by our team"
         />
         <ProductGrid showLoadMore />
