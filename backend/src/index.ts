@@ -10,18 +10,17 @@ import productRoutes from "./routes/products";
 import clickRoutes from "./routes/clicks";
 import analyticsRoutes from "./routes/analytics";
 import uploadRoutes from "./routes/upload";
-const __dirname = path.resolve();
+const uploadsPath = path.join(process.cwd(),  "uploads");
 
 async function main() {
   await connectDb();
 
   const app = express();
-
   app.use(
-    cors({
-      origin: [env.clientUrl,"http://localhost:3000", "http://localhost:3001"],
-      credentials: true,
-    })
+  cors({
+    origin: [env.clientUrl, "http://localhost:3000"],
+    credentials: true,
+     })
   );
   app.use(express.json({ limit: "2mb" }));
   app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
