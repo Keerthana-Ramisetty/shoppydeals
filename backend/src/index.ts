@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
-import { fileURLToPath } from "url";
 import { connectDb } from "./config/db";
 import { env } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler";
@@ -11,7 +10,7 @@ import productRoutes from "./routes/products";
 import clickRoutes from "./routes/clicks";
 import analyticsRoutes from "./routes/analytics";
 import uploadRoutes from "./routes/upload";
-const __dirname = path.resolve();
+const __dirname = fileURLToPath(import.meta.url);
 
 async function main() {
   await connectDb();
