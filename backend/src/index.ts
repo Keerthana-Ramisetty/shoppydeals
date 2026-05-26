@@ -10,7 +10,7 @@ import productRoutes from "./routes/products";
 import clickRoutes from "./routes/clicks";
 import analyticsRoutes from "./routes/analytics";
 import uploadRoutes from "./routes/upload";
-const __dirname = fileURLToPath(import.meta.url);
+const __dirname = path.resolve();
 
 async function main() {
   await connectDb();
