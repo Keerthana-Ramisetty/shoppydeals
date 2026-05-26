@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs";
-import { connectDb } from "./config/db.js";
-import { env } from "./config/env.js";
-import { Admin } from "./models/Admin.js";
-import { Category } from "./models/Category.js";
-import { Product } from "./models/Product.js";
+import { connectDb } from "./config/db";
+import { env } from "./config/env";
+import { Admin } from "./models/Admin";
+import { Category } from "./models/Category";
+import { Product } from "./models/Product";
 
 const DEFAULT_CATEGORIES = [
   { name: "Mobiles", slug: "mobiles", icon: "📱", order: 1 },

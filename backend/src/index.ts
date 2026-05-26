@@ -3,14 +3,14 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectDb } from "./config/db";
-import { env } from "./config/env.js";
+import { env } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler.js";
-import authRoutes from "./routes/auth.js";
-import categoryRoutes from "./routes/categories.js";
-import productRoutes from "./routes/products.js";
-import clickRoutes from "./routes/clicks.js";
-import analyticsRoutes from "./routes/analytics.js";
-import uploadRoutes from "./routes/upload.js";
+import authRoutes from "./routes/auth";
+import categoryRoutes from "./routes/categories;
+import productRoutes from "./routes/products";
+import clickRoutes from "./routes/clicks";
+import analyticsRoutes from "./routes/analytics";
+import uploadRoutes from "./routes/upload";
 const __dirname = path.resolve();
 
 async function main() {
@@ -39,7 +39,8 @@ async function main() {
   app.use("/api/upload", uploadRoutes);
 
   app.use(errorHandler);
-  const PORT = process.env.PORT || env.port || 5000;
+  const PORT = process.env.PORT ||
+   env.port || 5000;
 
   app.listen(PORT, () => {
   console.log(`API running on port ${PORT}`);
