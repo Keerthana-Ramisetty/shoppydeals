@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { Product } from "../models/Product.js";
-import { ClickAnalytics } from "../models/ClickAnalytics.js";
+import { Product } from "../models/Product";
+import { ClickAnalytics } from "../models/ClickAnalytics";
 
 const router = Router();
 

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { Admin } from "../models/Admin.js";
-import { env } from "../config/env.js";
-import { authMiddleware, type AuthRequest } from "../middleware/auth.js";
+import { Admin } from "../models/Admin";
+import { env } from "../config/env";
+import { authMiddleware, type AuthRequest } from "../middleware/auth";
 
 const router = Router();
 
