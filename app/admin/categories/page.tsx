@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AdminShell } from "../../../components/admin/AdminShell.js";
-import { api } from "../../../lib/api.js";
-import { getToken } from "../../../lib/auth.js";
-import type { Category } from "../../../lib/types.js";
+import { AdminShell } from "../../../components/admin/AdminShell";
+import { api } from "../../../lib/api";
+import { getToken } from "../../../lib/auth";
+import type { Category } from "../../../lib/types";
 
 export default function AdminCategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([]);
