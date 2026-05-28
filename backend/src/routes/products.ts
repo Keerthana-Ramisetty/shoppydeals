@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { Product } from "../models/Product";
-import { Category } from "../models/Category";
-import { authMiddleware } from "../middleware/auth";
-import { uniqueProductSlug } from "../utils/slugify";
+import { Product } from "../models/Product.js";
+import { Category } from "../models/Category.js";
+import { authMiddleware } from "../middleware/auth.js";
+import { uniqueProductSlug } from "../utils/slugify.js";
 
 const router = Router();
 

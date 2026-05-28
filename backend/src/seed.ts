@@ -1,9 +1,9 @@
 import bcrypt from "bcryptjs";
-import { connectDb } from "./config/db";
-import { env } from "./config/env";
-import { Admin } from "./models/Admin";
-import { Category } from "./models/Category";
-import { Product } from "./models/Product";
+import { connectDb } from "./config/db.js";
+import { env } from "./config/env.js";
+import { Admin } from "./models/Admin.js";
+import { Category } from "./models/Category.js";
+import { Product } from "./models/Product.js";
 
 const DEFAULT_CATEGORIES = [
   { name: "Mobiles", slug: "mobiles", icon: "📱", order: 1 },
@@ -20,7 +20,8 @@ const SAMPLE_PRODUCTS = [
     description: "6.5\" display, 50MP camera, 6000mAh battery — best budget 5G phone deal.",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop",
     originalPrice: 15999,
-    dealPrice: 12499,
+    
+    : 12499,
     store: "Amazon",
     featured: true,
     categorySlug: "mobiles",

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { ClickAnalytics } from "../models/ClickAnalytics";
-import { Product } from "../models/Product";
-import { authMiddleware } from "../middleware/auth";
+import { ClickAnalytics } from "../models/ClickAnalytics.js";
+import { Product } from "../models/Product.js";
+import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
 

@@ -1,5 +1,5 @@
 import slugifyLib from "slugify";
-import { Product } from "../models/Product";
+import { Product } from "../models/Product.js";
 
 export function toSlug(text: string): string {
   return slugifyLib(text, { lower: true, strict: true });

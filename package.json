@@ -8,9 +8,9 @@
     "dev": "next dev",
     "dev:api": "npm run dev --prefix backend",
     "dev:all": "npm run dev & npm run dev:api",
-    "build": "tsc",
+    "build": "next build",
     "build:api": "npm run build --prefix backend",
-    "start": "node dist/index.js",
+    "start": "next start",
     "start:api": "npm run start --prefix backend",
     "lint": "eslint",
     "seed": "npm run seed --prefix backend"

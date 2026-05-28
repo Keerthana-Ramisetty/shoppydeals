@@ -1,15 +1,15 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
-import { connectDb } from "./config/db";
-import { env } from "./config/env";
-import { errorHandler } from "./middleware/errorHandler";
-import authRoutes from "./routes/auth";
-import categoryRoutes from "./routes/categories";
-import productRoutes from "./routes/products";
-import clickRoutes from "./routes/clicks";
-import analyticsRoutes from "./routes/analytics";
-import uploadRoutes from "./routes/upload";
+import { connectDb } from "./config/db.js";
+import { env } from "./config/env.js";
+import { errorHandler } from "./middleware/errorHandler.js";
+import authRoutes from "./routes/auth.js";
+import categoryRoutes from "./routes/categories.js";
+import productRoutes from "./routes/products.js";
+import clickRoutes from "./routes/clicks.js";
+import analyticsRoutes from "./routes/analytics.js";
+import uploadRoutes from "./routes/upload.js";
 const uploadsPath = path.join(process.cwd(),  "uploads");
 
 async function main() {
