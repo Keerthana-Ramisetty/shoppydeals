@@ -27,7 +27,7 @@ async function main() {
   /* ---------------- CORS ---------------- */
   app.use(
     cors({
-      origin: [env.clientUrl, "http://localhost:3000"],
+      origin: [env.clientUrl, "http://shoppydeals.vercel.app"],
       credentials: true,
     })
   );

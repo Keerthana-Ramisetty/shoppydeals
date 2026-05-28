@@ -1,6 +1,6 @@
 import type { Category, DashboardStats, Product, ProductsResponse } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://shoppydeals.onrender.com";
 
 export function getImageUrl(image: string): string {
   if (!image) return "/placeholder-product.svg";
@@ -111,7 +111,7 @@ export const api = {
 
   createCategory: (token: string, body: Record<string, unknown>) =>
     fetchApi<{ category: Category }>("/api/categories", {
-      method: "POST",
+      method: "POST", 
       token,
       body: JSON.stringify(body),
     }),
