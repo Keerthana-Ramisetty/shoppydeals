@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AdminShell } from "../../../components/admin/AdminShell";
+import { AdminShell } from "../../../components/admin/AdminShell.js";
 import { api } from "@/lib/api";
 import { getToken } from "@/lib/auth";
 import type { Category } from "@/lib/types";
