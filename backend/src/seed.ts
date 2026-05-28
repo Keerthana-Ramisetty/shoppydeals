@@ -20,8 +20,7 @@ const SAMPLE_PRODUCTS = [
     description: "6.5\" display, 50MP camera, 6000mAh battery — best budget 5G phone deal.",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop",
     originalPrice: 15999,
-    
-    : 12499,
+    dealprice: 12499,
     store: "Amazon",
     featured: true,
     categorySlug: "mobiles",
