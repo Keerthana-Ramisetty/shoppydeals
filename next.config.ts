@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   remotePatterns: [
     {
       protocol: "https",
-      hostname: "https://shoppydeals.onrender.com",
+      hostname: "shoppydeals.onrender.com",
       pathname: "/uploads/**",
     },
     {
