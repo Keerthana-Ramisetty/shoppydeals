@@ -120,7 +120,7 @@ async function seed() {
 
     for (const p of SAMPLE_PRODUCTS) {
       const discount = Math.round(
-        ((p.originalPrice - p.dealPrice) / p.originalPrice) * 100
+        ((p.originalPrice - p.dealPrice!) / p.originalPrice) * 100
       );
       await Product.create({
         title: p.title,
