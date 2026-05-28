@@ -23,7 +23,7 @@ export function authMiddleware(
   }
 
   const token = header.slice(7);
-  try {.js
+  try {
     const payload = jwt.verify(token, env.jwtSecret) as AuthPayload;
     req.admin = payload;
     next();
