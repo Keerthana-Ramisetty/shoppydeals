@@ -27,7 +27,7 @@ async function main() {
   /* ---------------- CORS ---------------- */
   app.use(
     cors({
-      origin: ["http://shoppydeals.vercel.app"],
+      origin: ["https://shoppydeals.vercel.app"],
       credentials: true,
     })
   );
