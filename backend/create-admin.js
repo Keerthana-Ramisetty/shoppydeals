@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 async function createAdmin() {
   try {
     // 1. Connect to MongoDB
-    await mongoose.connect("mongodb+srv://shoppydeals:shoppydeals%400327@cluster0.mzzgpaj.mongodb.net/shoppydeals?appName=Cluster0");
+    await mongoose.connect("mongodb+srv://shoppydeals:admin123@cluster0.mzzgpaj.mongodb.net/shoppydeals?appName=Cluster0");
 
     // 2. Define schema
     const adminSchema = new mongoose.Schema(
