@@ -61,6 +61,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
     if (!file) return;
     const token = getToken();
     if (!token) return;
+    setImagePreview(URL.createObjectURL(file));
     setLoading(true);
     try {
       const { url } = await api.uploadImage(token, file);
