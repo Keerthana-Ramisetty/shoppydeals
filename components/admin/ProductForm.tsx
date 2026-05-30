@@ -55,26 +55,31 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
       return next;
     });
   }
-
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const token = getToken();
-    if (!token) return;
-    setImagePreview(URL.createObjectURL(file));
-    setImagePreview(localUrl);
-    setLoading(true);
-    try {
-      const { url } = await api.uploadImage(token, file);
-      console.log("UPLOAD RESPONSE URL:", url);
-      setForm((f) => ({ ...f, image: url }));
-      setImagePreview(getImageUrl(url));
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed");
-    } finally {
-      setLoading(false);
-    }
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  const token = getToken();
+  if (!token) return;
+  const localPreview = URL.createObjectURL(file);
+  setImagePreview(localPreview);
+
+  setLoading(true);
+
+  try {
+    const { url } = await api.uploadImage(token, file);
+
+    console.log("UPLOAD URL:", url);
+
+    setForm((f) => ({ ...f, image: url }));
+
+    
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "Upload failed");
+  } finally {
+    setLoading(false);
   }
+}
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

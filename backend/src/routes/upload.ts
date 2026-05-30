@@ -37,6 +37,7 @@ const upload = multer({
 const router = Router();
 
 router.post("/", authMiddleware, upload.single("image"), (req, res) => {
+  console.log("UPLOAD FILE:", req.file);
   if (!req.file) {
     res.status(400).json({ message: "No image uploaded" });
     return;

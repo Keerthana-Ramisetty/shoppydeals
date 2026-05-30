@@ -36,7 +36,10 @@ async function main() {
   app.use(express.json({ limit: "2mb" }));
 
   /* ---------------- STATIC FILES ---------------- */
-  app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+  app.use(
+  "/uploads",
+   express.static(path.join(process.cwd(), "../uploads"))
+   );
 
   /* ---------------- HEALTH CHECK ---------------- */
   app.get("/api/health", (_req, res) => {
