@@ -1,53 +1,51 @@
 import { Router } from "express";
 import multer from "multer";
-import { v2 as cloudinary } from "cloudinary";
+import cloudinary from "../config/cloudinary";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
+// multer memory storage (correct for cloudinary stream)
 const upload = multer({
   storage: multer.memoryStorage(),
 });
 
+// upload route
 router.post(
   "/",
   authMiddleware,
   upload.single("image"),
   async (req, res) => {
     try {
-     if (!req.file) {
-  res.status(400).json({ message: "No image uploaded" });
-  return;
-}
+      if (!req.file) {
+        return res.status(400).json({ message: "No image uploaded" });
+      }
 
-const file = req.file;
+      const file = req.file;
 
-const result = await new Promise<any>((resolve, reject) => {
-  const stream = cloudinary.uploader.upload_stream(
-    {
-      folder: "shoppydeals",
-    },
-    (error:any, result: any) => {
-      if (error) reject(error);
-      else resolve(result);
-    }
-  );
+      // Cloudinary upload stream
+      const result = await new Promise<any>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "shoppydeals",
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
 
-  stream.end(file.buffer);
-});
-
-      res.json({
-        url: result.secure_url,
+        stream.end(file.buffer);
       });
+
+      return res.json({
+        url: result.secure_url,
+        public_id: result.public_id,
+      });
+
     } catch (error) {
       console.error("Cloudinary Upload Error:", error);
-      res.status(500).json({
+      return res.status(500).json({
         message: "Upload failed",
       });
     }
