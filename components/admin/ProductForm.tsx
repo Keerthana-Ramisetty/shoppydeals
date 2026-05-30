@@ -39,6 +39,15 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
   useEffect(() => {
     api.getCategories().then((r) => setCategories(r.categories));
   }, []);
+  
+  useEffect(() => {
+    if (product?.image) {
+      setImagePreview(getImageUrl(product.image));
+    } else {
+      setImagePreview("");
+    }
+  }, [product]);
+
 
   function updateField(key: string, value: string | boolean) {
     setForm((f) => {
@@ -71,10 +80,11 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
 
     console.log("UPLOAD URL:", url);
 
-    setForm((f) => ({ ...f, image: url }));
-
-    
-  } catch (err) {
+    setForm((f) => ({ 
+    ...f, 
+    image: url 
+    }));
+     } catch (err) {
     setError(err instanceof Error ? err.message : "Upload failed");
   } finally {
     setLoading(false);
@@ -222,7 +232,7 @@ export function ProductForm({ product, onSuccess }: ProductFormProps) {
           {imagePreview && (
             <div className="relative mt-2 h-32 w-32 overflow-hidden rounded-lg border">
               <Image
-                src={imagePreview}
+                src={imagePreview || "/placeholder-product.svg"}
                 alt="Preview"
                 fill
                 className="object-contain"
