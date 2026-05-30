@@ -33,7 +33,7 @@ const result = await new Promise<any>((resolve, reject) => {
     {
       folder: "shoppydeals",
     },
-    (error, result) => {
+    (error:any, result: any) => {
       if (error) reject(error);
       else resolve(result);
     }
