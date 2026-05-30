@@ -44,10 +44,10 @@ async function handleViewDeal() {
           transition={{ type: "spring", stiffness: 300, damping: 22 }}
         >
           <Image
-            src={getImageUrl(product.image)}
-            alt={product.title}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            src={getImageUrl(product.image) ||"/placeholder-product.svg"}
+            alt="product"
+            width={300}
+            height={300}
             className="object-contain p-3"
             loading="lazy"
           />
