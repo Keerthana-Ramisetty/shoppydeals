@@ -13,6 +13,8 @@ interface ProductFormProps {
 }
 
 export function ProductForm({ product, onSuccess }: ProductFormProps) {
+  console.log("PRODUCT:", product);
+  console.log("IMAGE:", product?.image);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false); // ✅ NEW
