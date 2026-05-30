@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import cloudinary from "../config/cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = Router();
@@ -29,7 +29,7 @@ router.post(
           {
             folder: "shoppydeals",
           },
-          (error, result) => {
+          (error: any, result: any) => {
             if (error) reject(error);
             else resolve(result);
           }
