@@ -4,11 +4,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://shoppydeals.onrender
 export function getImageUrl(image: string): string {
   if (!image) return "/placeholder-product.svg";
 
-  // Cloudinary full URL case
+  // Cloudinary images
   if (image.startsWith("http")) return image;
 
-  // fallback (old uploads case - avoid broken /uploads//uploads)
-  return image;
+  // Old broken local uploads
+  return "/placeholder-product.svg";
 }
 
 
