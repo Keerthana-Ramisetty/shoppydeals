@@ -1,13 +1,23 @@
 import type { Category, DashboardStats, Product, ProductsResponse } from "./types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://shoppydeals.onrender.com";
-
 export function getImageUrl(image: string): string {
   if (!image) return "/placeholder-product.svg";
+
   if (image.startsWith("http")) return image;
-  if (image.startsWith("/uploads")) return `${API_URL}${image}`;
-  return image;
+
+  if (image.startsWith("/uploads")) {
+    return `${API_URL}${image}`;
+  }
+
+  if (image.startsWith("uploads/")) {
+    return `${API_URL}/${image}`;
+  }
+
+  // fallback (MOST IMPORTANT FIX)
+  return `${API_URL}/uploads/${image}`;
 }
+
 
 async function fetchApi<T>(
   path: string,

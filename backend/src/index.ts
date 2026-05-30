@@ -38,7 +38,7 @@ async function main() {
   /* ---------------- STATIC FILES ---------------- */
   app.use(
   "/uploads",
-   express.static(path.join(process.cwd(), "../uploads"))
+   express.static(path.join(process.cwd(), "uploads"))
    );
 
   /* ---------------- HEALTH CHECK ---------------- */
