@@ -45,11 +45,10 @@ async function handleViewDeal() {
         >
           <Image
             src={getImageUrl(product.image) ||"/placeholder-product.svg"}
-            alt="product"
             width={300}
             height={300}
-            className="object-contain p-3"
-            loading="lazy"
+            alt="product"
+            unoptimized
           />
         </motion.div>
       </div>
