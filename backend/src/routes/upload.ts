@@ -1,49 +1,57 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+import { v2 as cloudinary } from "cloudinary";
 import { authMiddleware } from "../middleware/auth.js";
-import { env } from "../config/env.js";
-const __dirname = path.resolve();
-
-const uploadsDir = path.join(__dirname, "../../uploads");
-
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadsDir),
-  filename: (_req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const ext = path.extname(file.originalname) || ".jpg";
-    cb(null, `${unique}${ext}`);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: env.uploadMaxMb * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    if (!file.mimetype.startsWith("image/")) {
-      cb(new Error("Only image files allowed"));
-      return;
-    }
-    cb(null, true);
-  },
-});
 
 const router = Router();
 
-router.post("/", authMiddleware, upload.single("image"), (req, res) => {
-  console.log("UPLOAD FILE:", req.file);
-  if (!req.file) {
-    res.status(400).json({ message: "No image uploaded" });
-    return;
-  }
-  const url = `/uploads/${req.file.filename}`;
-  res.json({ url, filename: req.file.filename });
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+});
+
+router.post(
+  "/",
+  authMiddleware,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+     if (!req.file) {
+  res.status(400).json({ message: "No image uploaded" });
+  return;
+}
+
+const file = req.file;
+
+const result = await new Promise<any>((resolve, reject) => {
+  const stream = cloudinary.uploader.upload_stream(
+    {
+      folder: "shoppydeals",
+    },
+    (error, result) => {
+      if (error) reject(error);
+      else resolve(result);
+    }
+  );
+
+  stream.end(file.buffer);
+});
+
+      res.json({
+        url: result.secure_url,
+      });
+    } catch (error) {
+      console.error("Cloudinary Upload Error:", error);
+      res.status(500).json({
+        message: "Upload failed",
+      });
+    }
+  }
+);
 
 export default router;
