@@ -6,15 +6,6 @@ export function getImageUrl(image: string): string {
 
   if (image.startsWith("http")) return image;
 
-  if (image.startsWith("/uploads")) {
-    return `${API_URL}${image}`;
-  }
-
-  if (image.startsWith("uploads/")) {
-    return `${API_URL}/${image}`;
-  }
-
-  // fallback (MOST IMPORTANT FIX)
   return `${API_URL}/uploads/${image}`;
 }
 
